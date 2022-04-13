@@ -1,0 +1,23 @@
+.root {
+  padding-bottom: 1em;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+span.root {
+  padding: 0 5px;
+}
+
+.root.strong {
+  font-weight: 600;
+}
+
+.root.italic {
+  font-style: italic;
+}
+
+.root.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  user-select: none;
+}

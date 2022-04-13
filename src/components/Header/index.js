@@ -1,4 +1,7 @@
 import s from './Header.module.css';
+import logo from '../../assets/images/logo.png';
+import Container from '../Container';
+
 const MENU = [
   {
     id: 1,
@@ -22,9 +25,9 @@ const MENU = [
   },
 ];
 
-const renderMenuItem = ({ id, title, link = '#' }) => {
+const MenuItem = ({ title, link = '#' }) => {
   return (
-    <li key={id}>
+    <li>
       <a href={link}>{title}</a>
     </li>
   );
@@ -34,10 +37,16 @@ const Header = () => {
   return (
     <header className={s.root}>
       <div className={s.header}>
-        <div className={s.container}>
-          <div className={s.logo}></div>
-          <ul className={s.nav}>{MENU.map((item) => renderMenuItem(item))}</ul>
-        </div>
+        <Container className={s.headerWrap}>
+          <div className={s.logo}>
+            <img src={logo} alt="Triple Triad Logo" />
+          </div>
+          <ul className={s.nav}>
+            {MENU.map(({ id, title, link }) => (
+              <MenuItem key={id} title={title} link={link} />
+            ))}
+          </ul>
+        </Container>
       </div>
     </header>
   );
