@@ -25,6 +25,7 @@ Text.propTypes = {
   strong: PropTypes.bool,
   italic: PropTypes.bool,
   disabled: PropTypes.bool,
+  children: PropTypes.node.isRequired,
 };
 
 export default Text;
