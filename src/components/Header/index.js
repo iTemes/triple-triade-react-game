@@ -1,6 +1,7 @@
-import s from './Header.module.css';
 import logo from '../../assets/images/logo.png';
 import Container from '../Container';
+
+import s from './Header.module.scss';
 
 const MENU = [
   {
