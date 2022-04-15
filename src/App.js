@@ -90,12 +90,15 @@ const App = () => {
 
   const handleLikeClick = (id) => {
     setCharacter((prevState) => {
-      const prevChatacters = [...prevState];
-      const clickedCharacter = prevChatacters.find((item) => item.id === id);
+      const updatedCharacters = prevState.map((item) => {
+        if (item.id === id) {
+          item.isLike = !item.isLike;
+        }
 
-      clickedCharacter && (clickedCharacter.isLike = !clickedCharacter.isLike);
+        return item;
+      });
 
-      return prevChatacters;
+      return updatedCharacters;
     });
   };
 
