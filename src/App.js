@@ -106,12 +106,10 @@ const App = () => {
   };
 
   const handleBackClick = () => {
-    console.log('handleBackClick', currentCardId);
     setCurrentCardId(null);
   };
 
   const handleReadBioClick = (id) => {
-    console.log('handleReadBioClick', currentCardId);
     setCurrentCardId(id);
   };
 

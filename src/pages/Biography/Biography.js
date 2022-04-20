@@ -293,15 +293,6 @@ export const BIO = {
   ],
 };
 
-const HEADING_TYPES = {
-  h1: {
-    level: 1,
-  },
-  h2: {
-    level: 2,
-  },
-};
-
 const renderNode = (node, key) => {
   const { type, text, src } = node;
 
@@ -327,23 +318,27 @@ const renderNode = (node, key) => {
     case 'img':
       return <img key={key} src={src} alt="" />;
     default:
-      return null;
+      return null; // Nothing to render
   }
 };
 
 const Biography = ({ id, onBackClick }) => {
-  const bioData = BIO[id];
+  const bioData = BIO[id] || [];
 
   const handleBackClick = () => {
     onBackClick && onBackClick();
   };
 
   return (
-    <section>
+    <section className={s.root}>
       <Button onClick={handleBackClick} className={s.button}>
         Go back
       </Button>
-      {bioData.map((item, idx) => renderNode(item, idx))}
+      {bioData.length ? (
+        bioData.map((item, idx) => renderNode(item, idx))
+      ) : (
+        <Heading level={2}>Ops! Has someone snapped the infinity gauntlet?</Heading>
+      )}
     </section>
   );
 };
