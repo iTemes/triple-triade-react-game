@@ -7,10 +7,14 @@ import Heading from '../Heading';
 import Text from '../Text';
 
 import s from './CharacterCard.module.scss';
+import Button from '../Button';
 
-const CharacterCard = ({ id, name, description, src, externalLink, humanName, isLike, onLikeClick }) => {
+const CharacterCard = ({ id, name, description, src, humanName, isLike, onLikeClick, onReadBioClick }) => {
   const handleLikeClick = () => {
     onLikeClick && onLikeClick(id);
+  };
+  const handleReadBioClick = () => {
+    onReadBioClick && onReadBioClick(id);
   };
   return (
     <div className={s.root}>
@@ -33,7 +37,9 @@ const CharacterCard = ({ id, name, description, src, externalLink, humanName, is
             </button>
           </div>
           <div className={s.readBio}>
-            <a href={externalLink}>Read bio</a>
+            <Button onClick={handleReadBioClick} small>
+              Read bio
+            </Button>
           </div>
         </div>
       </div>
@@ -46,10 +52,10 @@ CharacterCard.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   src: PropTypes.string,
-  externalLink: PropTypes.string,
   humanName: PropTypes.string,
   isLike: PropTypes.bool,
   likeClick: PropTypes.func,
+  onReadBioClick: PropTypes.func,
 };
 
 export default CharacterCard;

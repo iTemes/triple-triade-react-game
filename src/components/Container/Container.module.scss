@@ -6,6 +6,11 @@
   width: 100%;
   overflow: hidden;
 
+  img {
+    display: block;
+    margin: 35px auto;
+  }
+
   @media (max-width: 1024px) {
     margin: 0 25px;
   }
