@@ -9,6 +9,7 @@ import CharacterCard from './components/CharacterCard/';
 
 import s from './App.module.scss';
 import Heading from './components/Heading';
+import Biography from './pages/Biography/';
 
 const CHARACTER = [
   {
@@ -86,49 +87,73 @@ const CHARACTER = [
 ];
 
 const App = () => {
-  const [character, setCharacter] = useState(CHARACTER);
+  const [characters, setCharacters] = useState(CHARACTER);
+  const [currentCardId, setCurrentCardId] = useState(null);
 
   const handleLikeClick = (id) => {
-    setCharacter((prevState) => {
-      const updatedCharacters = prevState.map((item) => {
+    setCharacters((prevState) =>
+      prevState.map((item) => {
         if (item.id === id) {
-          item.isLike = !item.isLike;
+          return {
+            ...item,
+            isLike: !item.isLike,
+          };
         }
 
         return item;
-      });
+      })
+    );
+  };
 
-      return updatedCharacters;
-    });
+  const handleBackClick = () => {
+    setCurrentCardId(null);
+  };
+
+  const handleReadBioClick = (id) => {
+    setCurrentCardId(id);
+  };
+
+  const renderCharacters = () => {
+    return (
+      <Container>
+        <Text element={'div'} className={s.cardTitle}>
+          <Heading underline>Marvel Cards</Heading>
+          <Heading level={2}>Collect your best five</Heading>
+        </Text>
+
+        <div className={s.cardWrap}>
+          {characters.map(({ id, name, description, thumbnail, humanName, isLike, externalLink }) => (
+            <CharacterCard
+              key={id}
+              id={id}
+              name={name}
+              description={description}
+              src={thumbnail.path}
+              humanName={humanName}
+              isLike={isLike}
+              externalLink={externalLink}
+              onLikeClick={handleLikeClick}
+              onReadBioClick={handleReadBioClick}
+            />
+          ))}
+        </div>
+      </Container>
+    );
+  };
+
+  const renderBiography = () => {
+    return (
+      <Container>
+        <Biography id={currentCardId} onBackClick={handleBackClick}></Biography>
+      </Container>
+    );
   };
 
   return (
     <>
       <Header />
       <Slider />
-      <section className={s.cardSection}>
-        <Container>
-          <Text element={'div'} className={s.cardTitle}>
-            <Heading underline>Marvel Cards</Heading>
-            <Heading level={2}>Collect your best five</Heading>
-          </Text>
-          <div className={s.cardWrap}>
-            {character.map(({ id, name, description, thumbnail, humanName, isLike, externalLink }) => (
-              <CharacterCard
-                key={id}
-                id={id}
-                name={name}
-                description={description}
-                src={thumbnail.path}
-                humanName={humanName}
-                isLike={isLike}
-                externalLink={externalLink}
-                onLikeClick={handleLikeClick}
-              />
-            ))}
-          </div>
-        </Container>
-      </section>
+      <section className={s.cardSection}>{currentCardId ? renderBiography() : renderCharacters()}</section>
       <Footer />
     </>
   );

@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import Button from '../Button';
 import Heading from '../Heading';
 
 import s from './Slider.module.scss';
@@ -16,7 +17,7 @@ const Slider = () => {
           </Heading>
 
           <div className={s.call}>
-            <button className={s.button}>Wow</button>
+            <Button light>Wow</Button>
           </div>
         </div>
       </div>

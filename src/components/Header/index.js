@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import cn from 'classnames';
+
 import logo from '../../assets/images/logo.png';
 import Container from '../Container';
 
@@ -25,7 +28,7 @@ const MENU = [
     link: '#',
   },
 ];
-
+const MENU_OFFSET_TOP = 60;
 const MenuItem = ({ title, link = '#' }) => {
   return (
     <li>
@@ -35,9 +38,20 @@ const MenuItem = ({ title, link = '#' }) => {
 };
 
 const Header = () => {
+  const [isSmallMenu, setIsSmallMenu] = useState(false);
+  useEffect(() => {
+    function handleWindowScroll() {
+      window.scrollY > MENU_OFFSET_TOP ? setIsSmallMenu(true) : setIsSmallMenu(false);
+    }
+    window.addEventListener('scroll', handleWindowScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleWindowScroll);
+    };
+  }, []);
   return (
     <header className={s.root}>
-      <div className={s.header}>
+      <div className={cn(s.header, { [s.small]: isSmallMenu })}>
         <Container className={s.headerWrap}>
           <div className={s.logo}>
             <img src={logo} alt="Triple Triad Logo" />
