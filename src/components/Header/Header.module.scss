@@ -77,6 +77,10 @@
       text-decoration: initial;
 
       transition: color 0.2s linear;
+
+      &.active {
+        color: red;
+      }
     }
   }
 }

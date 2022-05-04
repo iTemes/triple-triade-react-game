@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import cn from 'classnames';
 
 import logo from '../../assets/images/logo.png';
@@ -9,30 +11,32 @@ import s from './Header.module.scss';
 const MENU = [
   {
     id: 1,
-    title: 'Menu 1',
-    link: '#',
+    title: 'Main',
+    link: '/',
   },
   {
     id: 2,
-    title: 'Menu 2',
-    link: '#',
+    title: 'Characters',
+    link: '/characters',
   },
   {
     id: 3,
-    title: 'Menu 3',
-    link: '#',
+    title: 'About',
+    link: '/about',
   },
   {
     id: 4,
-    title: 'Menu 4',
-    link: '#',
+    title: 'Contacts',
+    link: '/contacts',
   },
 ];
 const MENU_OFFSET_TOP = 60;
 const MenuItem = ({ title, link = '#' }) => {
   return (
     <li>
-      <a href={link}>{title}</a>
+      <NavLink to={link} className={({ isActive }) => cn({ [s.active]: isActive })}>
+        {title}
+      </NavLink>
     </li>
   );
 };

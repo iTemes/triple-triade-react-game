@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '../../components/Button';
+import { useParams } from 'react-router-dom';
+
 import Heading from '../../components/Heading';
 import Text from '../../components/Text';
 
 import s from './Biography.module.scss';
+import Container from '../../components/Container';
 
 export const BIO = {
   1011334: [
@@ -322,30 +323,23 @@ const renderNode = (node, key) => {
   }
 };
 
-const Biography = ({ id, onBackClick }) => {
-  const bioData = BIO[id] || [];
-
-  const handleBackClick = () => {
-    onBackClick && onBackClick();
-  };
+const Biography = () => {
+  let { characterId } = useParams();
+  const bioData = BIO[characterId] || [];
 
   return (
     <section className={s.root}>
-      <Button onClick={handleBackClick} className={s.button}>
-        Go back
-      </Button>
-      {bioData.length ? (
-        bioData.map((item, idx) => renderNode(item, idx))
-      ) : (
-        <Heading level={2}>Ops! Has someone snapped the infinity gauntlet?</Heading>
-      )}
+      <Container>
+        {bioData.length ? (
+          bioData.map((item, idx) => renderNode(item, idx))
+        ) : (
+          <Heading level={2}>Ops! Has someone snapped the infinity gauntlet?</Heading>
+        )}
+      </Container>
     </section>
   );
 };
 
-Biography.propTypes = {
-  id: PropTypes.number.isRequired,
-  onBackClick: PropTypes.func,
-};
+Biography.propTypes = {};
 
 export default Biography;

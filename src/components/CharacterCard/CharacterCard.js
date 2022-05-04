@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
 import { ReactComponent as LikeIcon } from './assets/icons/heart.svg';
@@ -9,12 +11,15 @@ import Text from '../Text';
 import s from './CharacterCard.module.scss';
 import Button from '../Button';
 
-const CharacterCard = ({ id, name, description, src, humanName, isLike, onLikeClick, onReadBioClick }) => {
+const CharacterCard = ({ id, name, description, src, humanName, isLike, onLikeClick }) => {
+  let navigate = useNavigate();
+
   const handleLikeClick = () => {
     onLikeClick && onLikeClick(id);
   };
   const handleReadBioClick = () => {
-    onReadBioClick && onReadBioClick(id);
+    console.log('READ BIO', id);
+    navigate(`/characters/${id}`);
   };
   return (
     <div className={s.root}>
@@ -55,7 +60,6 @@ CharacterCard.propTypes = {
   humanName: PropTypes.string,
   isLike: PropTypes.bool,
   likeClick: PropTypes.func,
-  onReadBioClick: PropTypes.func,
 };
 
 export default CharacterCard;
