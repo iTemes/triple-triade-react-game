@@ -26,10 +26,6 @@ const Main = () => {
     );
   };
 
-  const handleReadBioClick = (id) => {
-    console.log('## bio id', id);
-  };
-
   return (
     <>
       <Slider />
@@ -52,7 +48,6 @@ const Main = () => {
                 isLike={isLike}
                 externalLink={externalLink}
                 onLikeClick={handleLikeClick}
-                onReadBioClick={handleReadBioClick}
               />
             ))}
           </div>

@@ -1,4 +1,3 @@
-import Container from '../../components/Container';
 import Heading from '../../components/Heading';
 import Text from '../../components/Text';
 import avatar from './assets/avatar.jpg';
@@ -7,7 +6,7 @@ import s from './Contacts.module.scss';
 
 const Contacts = () => {
   return (
-    <Container className={s.root}>
+    <div className={s.root}>
       <Heading>Контакты</Heading>
       <section className={s.info}>
         <img className={s.avatar} src={avatar} width="355" height="472" alt="" />
@@ -45,7 +44,7 @@ const Contacts = () => {
           </ul>
         </div>
       </section>
-    </Container>
+    </div>
   );
 };
 

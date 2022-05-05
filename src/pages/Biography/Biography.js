@@ -1,11 +1,15 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, useNavigate, Navigate, useLocation } from 'react-router-dom';
 
 import Heading from '../../components/Heading';
 import Text from '../../components/Text';
+import Button from '../../components/Button';
+import AnchorLink from '../../components/AnchorLink/AnchorLink';
+
+import scrollByHash from '../../helpers/scrollByHash';
+import joinTextToId from '../../helpers/joinTextToId';
 
 import s from './Biography.module.scss';
-import Container from '../../components/Container';
 
 export const BIO = {
   1011334: [
@@ -300,14 +304,14 @@ const renderNode = (node, key) => {
   switch (type) {
     case 'h1':
       return (
-        <Heading key={key} level={1}>
+        <Heading key={key} level={1} className={s.anchorTitle}>
           {text}
         </Heading>
       );
     case 'h2':
       return (
-        <Heading key={key} level={2}>
-          {text}
+        <Heading id={joinTextToId(text)} key={key} level={2} className={s.anchorTitle}>
+          {text} <AnchorLink hashLink={joinTextToId(text)} />
         </Heading>
       );
     case 'paragraph':
@@ -324,18 +328,25 @@ const renderNode = (node, key) => {
 };
 
 const Biography = () => {
-  let { characterId } = useParams();
+  const navigate = useNavigate();
+  const { characterId } = useParams();
+  const { hash } = useLocation();
+
   const bioData = BIO[characterId] || [];
+
+  const handleBackClick = () => navigate(-1);
+
+  useEffect(() => {
+    scrollByHash(hash);
+  }, [hash]);
 
   return (
     <section className={s.root}>
-      <Container>
-        {bioData.length ? (
-          bioData.map((item, idx) => renderNode(item, idx))
-        ) : (
-          <Heading level={2}>Ops! Has someone snapped the infinity gauntlet?</Heading>
-        )}
-      </Container>
+      <Button onClick={handleBackClick} className={s.button}>
+        Go back
+      </Button>
+
+      {bioData.length ? bioData.map((item, idx) => renderNode(item, idx)) : <Navigate to={'/characters'} replace />}
     </section>
   );
 };
