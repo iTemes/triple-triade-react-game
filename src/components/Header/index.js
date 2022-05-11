@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate, useMatch } from 'react-router-dom';
 
 import cn from 'classnames';
 
@@ -43,6 +43,15 @@ const MenuItem = ({ title, link = '#' }) => {
 
 const Header = () => {
   const [isSmallMenu, setIsSmallMenu] = useState(false);
+  const navigate = useNavigate();
+  const match = useMatch('/');
+
+  const handleLogoClick = () => {
+    if (match) return;
+
+    navigate('/');
+  };
+
   useEffect(() => {
     function handleWindowScroll() {
       window.scrollY > MENU_OFFSET_TOP ? setIsSmallMenu(true) : setIsSmallMenu(false);
@@ -58,7 +67,7 @@ const Header = () => {
       <div className={cn(s.header, { [s.small]: isSmallMenu })}>
         <Container className={s.headerWrap}>
           <div className={s.logo}>
-            <img src={logo} alt="Triple Triad Logo" />
+            <img src={logo} alt="Triple Triad Logo" onClick={handleLogoClick} />
           </div>
           <ul className={s.nav}>
             {MENU.map(({ id, title, link }) => (

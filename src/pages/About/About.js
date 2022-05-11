@@ -1,11 +1,10 @@
-import Container from '../../components/Container';
 import Heading from '../../components/Heading';
 
 import Text from '../../components/Text';
 
 const About = () => {
   return (
-    <Container>
+    <>
       <Heading>About game</Heading>
       <Text>
         Triple Triad is played on a blank 3-by-3 square game board. Squall plays against one opponent at a time in
@@ -50,7 +49,7 @@ const About = () => {
         sudden death scenario where the grid is cleared, and the game is played until one player wins. Again, depending
         on the rules in effect, the winner will claim a prize of one of the loser's card.
       </Text>
-    </Container>
+    </>
   );
 };
 

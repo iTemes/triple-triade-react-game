@@ -18,7 +18,6 @@ const CharacterCard = ({ id, name, description, src, humanName, isLike, onLikeCl
     onLikeClick && onLikeClick(id);
   };
   const handleReadBioClick = () => {
-    console.log('READ BIO', id);
     navigate(`/characters/${id}`);
   };
   return (
