@@ -1,13 +1,14 @@
-import { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 
-import Layout from './components/Layout/Layout';
-import Main from './pages/Main/Main';
-import About from './pages/About/About';
-import Biography from './pages/Biography/Biography';
-import Characters from './pages/Characters/Characters';
-import Contacts from './pages/Contacts/Contacts';
-import NotFound from './pages/NotFound/NotFound';
+import Layout from "./components/Layout/Layout";
+import Main from "./pages/Main/Main";
+import About from "./pages/About/About";
+import Biography from "./pages/Biography/Biography";
+import Characters from "./pages/Characters/Characters";
+import Contacts from "./pages/Contacts/Contacts";
+import NotFound from "./pages/NotFound/NotFound";
+import Login from "./pages/LoginFormLayout";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -17,6 +18,7 @@ const App = () => {
 
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Main />} />
         <Route path="about" element={<About />} />
