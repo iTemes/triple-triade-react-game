@@ -8,6 +8,7 @@ import { ReactComponent as Pen } from "./assets/icon-pen.svg";
 
 import Footer from "../../components/Footer";
 import Input from "../../components/Input";
+import Button from "../../components/Button/Button";
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -29,6 +30,10 @@ const Login = () => {
       };
     });
 
+    checkPasswordValidity(name, value);
+  };
+
+  const checkPasswordValidity = (name, value) => {
     const isRepeatPassword = name === "repeatPassword";
     const isPasswordsEqual = form.password !== value;
 
@@ -39,17 +44,13 @@ const Login = () => {
     }
   };
 
-  const handleOpenRegister = () => {
-    setIsRegister(true);
-  };
-
-  const handleCloseRegister = () => {
-    setIsRegister(false);
+  const toggleRegister = () => {
+    setIsRegister((prevState) => !prevState);
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("form", form);
+    console.log("form", form); // TODO Send Form
 
     setForm({ email: "", password: "", repeatPassword: "" });
   };
@@ -84,89 +85,71 @@ const Login = () => {
               value={form.email}
               onChange={handleInputChange}
             />
-            <div className={s.inputContainer}>
-              <input
-                ref={emailLogin}
-                type="email"
-                name="email"
-                id="#signup-email"
-                required
-                value={form.email}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="#signup-email">Email</label>
-              <div className={s.bar}></div>
-            </div>
-            <div className={s.inputContainer}>
-              <input
-                type="password"
-                name="password"
-                id="#signup-password"
-                required
-                value={form.password}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="#signup-password">Password</label>
-              <div className={s.bar} />
-            </div>
+            <Input
+              type="password"
+              name="password"
+              label="Password"
+              id="#signup-password"
+              required
+              value={form.password}
+              onChange={handleInputChange}
+            />
+
             <div className={s.buttonContainer}>
-              <button>
+              <Button>
                 <span>Go</span>
-              </button>
+              </Button>
             </div>
           </form>
         </div>
         <div className={cn(s.card, s.alt)}>
-          <button className={cn(s.toggle, { [s.active]: isRegister })} onClick={handleOpenRegister}>
+          <button className={cn(s.toggle, { [s.active]: isRegister })} onClick={toggleRegister}>
             <Pen />
           </button>
           <h1 className={s.title}>
             Register
-            <div className={s.close} onClick={handleCloseRegister} />
+            <div className={s.close} onClick={toggleRegister} />
           </h1>
           <form onSubmit={handleFormSubmit}>
-            <div className={s.inputContainer}>
-              <input
-                ref={emailRegister}
-                type="email"
-                name="email"
-                id="#register-email"
-                required
-                value={form.email}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="#registeremail">Email</label>
-              <div className={s.bar} />
-            </div>
-            <div className={s.inputContainer}>
-              <input
-                type="password"
-                name="password"
-                id="#register-password"
-                required
-                value={form.password}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="#register-password">Password</label>
-              <div className={s.bar} />
-            </div>
-            <div className={s.inputContainer}>
-              <input
-                ref={repeatPassword}
-                type="password"
-                name="repeatPassword"
-                id="#signup-repeat-password"
-                required
-                value={form.repeatPassword}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="#signup-repeat-password">Repeat Password</label>
-              <div className={s.bar} />
-            </div>
+            <Input
+              className={s.inputContainer}
+              parentRef={emailRegister}
+              type="email"
+              label="Email"
+              name="email"
+              id="#register-email"
+              required
+              value={form.email}
+              onChange={handleInputChange}
+              alt
+            />
+            <Input
+              className={s.inputContainer}
+              type="password"
+              name="password"
+              label="Password"
+              id="#register-password"
+              required
+              value={form.password}
+              onChange={handleInputChange}
+              alt
+            />
+            <Input
+              className={cn(s.inputContainer)}
+              parentRef={repeatPassword}
+              type="password"
+              name="repeatPassword"
+              label="Repeat Password"
+              id="#signup-repeat-password"
+              required
+              value={form.repeatPassword}
+              onChange={handleInputChange}
+              alt
+            />
             <div className={s.buttonContainer}>
-              <button>
+              <Button>
                 <span>Register</span>
-              </button>
+              </Button>
             </div>
           </form>
         </div>
