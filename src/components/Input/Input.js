@@ -3,6 +3,7 @@ import cn from "classnames";
 
 import s from "./Input.module.scss";
 
+// TODO React.ForwardRef or useImperativeHandle
 const Input = ({ id, label, parentRef, name, type, className, onChange, value, required, alt }) => {
   return (
     <div className={cn(s.root, className, { [s.alt]: alt })}>
