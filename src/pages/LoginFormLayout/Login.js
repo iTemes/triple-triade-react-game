@@ -30,18 +30,14 @@ const Login = () => {
       };
     });
 
-    checkPasswordValidity(name, value);
+    if (name === "repeatPassword") {
+      checkPasswordValidity(value);
+    }
   };
 
-  const checkPasswordValidity = (name, value) => {
-    const isRepeatPassword = name === "repeatPassword";
-    const isPasswordsEqual = form.password !== value;
-
-    if (isRegister && isRepeatPassword && isPasswordsEqual) {
-      repeatPassword.current.setCustomValidity("I am expecting an equal password!");
-    } else {
-      repeatPassword.current.setCustomValidity("");
-    }
+  const checkPasswordValidity = (value) => {
+    const error = form.password !== value ? "I am expecting an equal password!" : "";
+    repeatPassword.current.setCustomValidity(error);
   };
 
   const toggleRegister = () => {

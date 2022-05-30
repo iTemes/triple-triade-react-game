@@ -4,7 +4,8 @@ import cn from "classnames";
 import s from "./Input.module.scss";
 
 // TODO React.ForwardRef or useImperativeHandle
-const Input = ({ id, label, parentRef, name, type, className, onChange, value, required, alt }) => {
+const Input = ({ id, label, parentRef, className, onChange, alt, ...inputProps }) => {
+  const { name, type = "text", value, required = false } = { ...inputProps };
   return (
     <div className={cn(s.root, className, { [s.alt]: alt })}>
       <input
@@ -23,22 +24,17 @@ const Input = ({ id, label, parentRef, name, type, className, onChange, value, r
 };
 
 Input.defaultProps = {
-  required: false,
-  type: "text",
   alt: false,
 };
 
 Input.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
   parentRef: PropTypes.object,
   className: PropTypes.string,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  required: PropTypes.bool,
   alt: PropTypes.bool,
+  inputProps: PropTypes.object,
 };
 
 export default Input;
