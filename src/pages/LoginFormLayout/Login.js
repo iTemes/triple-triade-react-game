@@ -30,7 +30,7 @@ const Login = () => {
       };
     });
 
-    if (name === "repeatPassword") {
+    if (isRegister && name === "repeatPassword") {
       checkPasswordValidity(value);
     }
   };
