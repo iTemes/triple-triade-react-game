@@ -76,7 +76,7 @@ const Login = () => {
               type="email"
               label="Email"
               name="email"
-              id="#signup-email"
+              id="signup-email"
               required
               value={form.email}
               onChange={handleInputChange}
@@ -85,7 +85,7 @@ const Login = () => {
               type="password"
               name="password"
               label="Password"
-              id="#signup-password"
+              id="signup-password"
               required
               value={form.password}
               onChange={handleInputChange}
@@ -113,7 +113,7 @@ const Login = () => {
               type="email"
               label="Email"
               name="email"
-              id="#register-email"
+              id="register-email"
               required
               value={form.email}
               onChange={handleInputChange}
@@ -124,7 +124,7 @@ const Login = () => {
               type="password"
               name="password"
               label="Password"
-              id="#register-password"
+              id="register-password"
               required
               value={form.password}
               onChange={handleInputChange}
@@ -136,7 +136,7 @@ const Login = () => {
               type="password"
               name="repeatPassword"
               label="Repeat Password"
-              id="#signup-repeat-password"
+              id="signup-repeat-password"
               required
               value={form.repeatPassword}
               onChange={handleInputChange}

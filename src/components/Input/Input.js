@@ -17,7 +17,7 @@ const Input = ({ id, label, parentRef, className, onChange, alt, ...inputProps }
         value={value}
         onChange={onChange}
       />
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={`#${id}`}>{label}</label>
       <div className={s.bar} />
     </div>
   );
