@@ -1,29 +1,20 @@
-import { useState } from "react";
+import { useContext } from "react";
 
 import Container from "../../components/Container";
 import Heading from "../../components/Heading";
 import Text from "../../components/Text";
 import CharacterCard from "../../components/CharacterCard";
 import Slider from "../../components/Slider";
-import CHARACTERS from "../../constans/characters";
+
 import s from "./Main.module.scss";
 
+import { CharactersContext } from "../../context/charactersContext";
+
 const Main = () => {
-  const [characters, setCharacters] = useState(CHARACTERS);
+  const { characters, onLikeClick } = useContext(CharactersContext);
 
   const handleLikeClick = (id) => {
-    setCharacters((prevState) =>
-      prevState.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            isLike: !item.isLike,
-          };
-        }
-
-        return item;
-      })
-    );
+    onLikeClick && onLikeClick(id);
   };
 
   return (
@@ -37,19 +28,21 @@ const Main = () => {
           </Text>
 
           <div className={s.cardWrap}>
-            {characters.map(({ id, name, description, thumbnail, humanName, isLike, externalLink }) => (
-              <CharacterCard
-                key={id}
-                id={id}
-                name={name}
-                description={description}
-                src={thumbnail.path}
-                humanName={humanName}
-                isLike={isLike}
-                externalLink={externalLink}
-                onLikeClick={handleLikeClick}
-              />
-            ))}
+            {characters.map(
+              ({ id, name, description, thumbnail, humanName, isLike, externalLink }) => (
+                <CharacterCard
+                  key={id}
+                  id={id}
+                  name={name}
+                  description={description}
+                  src={thumbnail.path}
+                  humanName={humanName}
+                  isLike={isLike}
+                  externalLink={externalLink}
+                  onLikeClick={handleLikeClick}
+                />
+              )
+            )}
           </div>
         </Container>
       </section>
