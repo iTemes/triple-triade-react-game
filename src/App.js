@@ -10,24 +10,29 @@ import Contacts from "./pages/Contacts/Contacts";
 import NotFound from "./pages/NotFound/NotFound";
 import Login from "./pages/LoginFormLayout";
 
+import CharactersProvider from "./context/charactersContext";
+
 const App = () => {
   const { pathname } = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Main />} />
-        <Route path="about" element={<About />} />
-        <Route path="characters" element={<Characters />} />
-        <Route path="characters/:characterId" element={<Biography />} />
-        <Route path="contacts" element={<Contacts />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+    <CharactersProvider>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path="characters" element={<Characters />} />
+          <Route path="about" element={<About />} />
+          <Route path="characters/:characterId" element={<Biography />} />
+          <Route path="contacts" element={<Contacts />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </CharactersProvider>
   );
 };
 
